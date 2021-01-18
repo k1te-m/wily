@@ -2,11 +2,15 @@ import React, { useState, useContext, useEffect } from "react";
 import { FormBtn, Input } from "../components/Form";
 import Logo from "../components/Logo";
 import AuthContext from "../context/auth/authContext";
+import AlertContext from "../context/alert/alertContext";
 
 const SignUp = (props) => {
   const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
 
   const { registerUser, error, clearErrors, isAuthenticated } = authContext;
+
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -33,10 +37,13 @@ const SignUp = (props) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    const mailformat = /.+@.+\..+/;
     if (name === "" || email === "" || password === "") {
-      alert("please enter all fields");
+      setAlert("Please enter all available fields.", "danger");
+    } else if (!email.match(mailformat)) {
+      setAlert("Please enter a valid email address.", "danger");
     } else if (password !== password2) {
-      alert("passwords do not match");
+      setAlert("Passwords do not match.", "danger");
     } else {
       registerUser({ name, email, password });
     }
