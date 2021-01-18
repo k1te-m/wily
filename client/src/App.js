@@ -3,10 +3,14 @@ import CreatePost from "./pages/CreatePost";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Alert from "./components/Alerts";
 
 // Auth Context States
 import AuthState from "./context/auth/AuthState";
 import setAuthToken from "./utils/setAuthToken";
+
+// Alert Context State
+import AlertState from "./context/alert/AlertState";
 
 // Put login token in local storage
 if (localStorage.token) {
@@ -17,14 +21,17 @@ function App() {
   return (
     <div className="App">
       <AuthState>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/post" component={CreatePost} />
-          </Switch>
-        </Router>
+        <AlertState>
+          <Router>
+            <Alert />
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/post" component={CreatePost} />
+            </Switch>
+          </Router>
+        </AlertState>
       </AuthState>
     </div>
   );
