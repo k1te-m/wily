@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
