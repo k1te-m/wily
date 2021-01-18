@@ -1,54 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-const ContactTextArea = styled.textarea`
-  color: #f2f2f2;
-  background-color: #182628;
-  border: 2px solid #3b945e;
-  :focus {
-    color: #f2f2f2;
-    background-color: #182628;
-    outline: none !important;
-    border: 1px solid #3b945e;
-    box-shadow: 0 0 10px #57ba98;
-  }
-`;
+const ContactTextArea = styled.textarea``;
 
-const FormLabel = styled.label`
-  color: #f2f2f2;
-`;
+const FormLabel = styled.label``;
 
-const FormInput = styled.input`
-  color: #f2f2f2;
-  background-color: #182628;
-  border: 2px solid #3b945e;
-  :focus {
-    color: #f2f2f2;
-    background-color: #182628;
-    outline: none !important;
-    border: 1px solid #3b945e;
-    box-shadow: 0 0 10px #57ba98;
-  }
-`;
+const FormInput = styled.input``;
 const FormButton = styled.button`
-  color: #f2f2f2;
-  background-color: #182628;
   border: 2px solid #3b945e;
-  :hover {
-    background-color: #3b945e;
-    border: 2px solid #182628;
-  }
-  :focus {
-    box-shadow: 0 0 10px #57ba98;
-  }
 `;
+
+const camelToSentence = (string) => {
+  let result = string.replace(/([A-Z])/g, " $1");
+  let finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+  return finalResult;
+};
 
 export function Input(props) {
   return (
-    <div className="form-group col-12">
-      <FormLabel htmlFor={props.name}>
-        {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
-      </FormLabel>
+    <div className="form-group">
+      <FormLabel htmlFor={props.name}>{camelToSentence(props.name)}</FormLabel>
       <FormInput className="form-control" {...props} />
     </div>
   );
@@ -56,7 +27,7 @@ export function Input(props) {
 
 export function TextArea(props) {
   return (
-    <div className="form-group col-12">
+    <div className="form-group">
       <FormLabel htmlFor={props.name}>
         {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
       </FormLabel>
