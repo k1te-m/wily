@@ -33,7 +33,7 @@ const SignUp = (props) => {
           <Input
             onChange={handleInputChange}
             name="name"
-            placeholder="Kelly"
+            placeholder="Kelly Smith"
             value={name}
             type="text"
           />
