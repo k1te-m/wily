@@ -4,8 +4,7 @@ import Logo from "../components/Logo";
 
 const SignUp = (props) => {
   const [userObject, setUserObject] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     password: "",
     password2: "",
