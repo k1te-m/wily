@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FormBtn, Input } from "../components/Form";
 import Logo from "../components/Logo";
+import AuthContext from "../context/auth/authContext";
 
 const SignUp = (props) => {
+  const authContext = useContext(AuthContext);
+
+  const { registerUser, error, clearErrors, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+    if (error === "User already exists") {
+      clearErrors();
+    }
+  }, [error, isAuthenticated, props.history]);
+
   const [userObject, setUserObject] = useState({
     name: "",
     email: "",
@@ -19,6 +33,13 @@ const SignUp = (props) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    if (name === "" || email === "" || password === "") {
+      alert("please enter all fields");
+    } else if (password !== password2) {
+      alert("passwords do not match");
+    } else {
+      registerUser({ name, email, password });
+    }
     console.log(userObject);
   };
 
