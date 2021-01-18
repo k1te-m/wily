@@ -2,12 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lastName: {
+  name: {
     type: String,
     required: true,
     trim: true,
@@ -23,7 +18,7 @@ const userSchema = new Schema({
     required: "Please enter a valid password.",
     trim: true,
   },
-  date: {
+  register_date: {
     type: Date,
     default: Date.now,
   },

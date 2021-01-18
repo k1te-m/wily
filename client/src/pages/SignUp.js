@@ -11,7 +11,7 @@ const SignUp = (props) => {
     password2: "",
   });
 
-  const { firstName, lastName, email, password, password2 } = userObject;
+  const { name, email, password, password2 } = userObject;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,16 +32,9 @@ const SignUp = (props) => {
         <form>
           <Input
             onChange={handleInputChange}
-            name="firstName"
+            name="name"
             placeholder="Kelly"
-            value={firstName}
-            type="text"
-          />
-          <Input
-            onChange={handleInputChange}
-            name="lastName"
-            placeholder="Smith"
-            value={lastName}
+            value={name}
             type="text"
           />
           <Input
