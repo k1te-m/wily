@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const config = require("config");
 
 // Express Instance
 const app = express();
@@ -28,7 +29,7 @@ app.get("*", function (req, res) {
 });
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/wily", {
+mongoose.connect(process.env.MONGODB_URI || config.get("MONGODB_URI"), {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
