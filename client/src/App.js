@@ -1,11 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Landing from "./layouts/Landing";
-import Nav from "./components/Nav";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
       <Router>
         <Switch>
           <Route exact path="/" component={Landing} />
