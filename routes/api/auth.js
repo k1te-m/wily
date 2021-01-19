@@ -15,23 +15,23 @@ if (process.env.NODE_ENV !== "production") {
   jwtENV = process.env.JWT_SECRET;
 }
 
-// @route     GET api/auth
-// @desc      Get logged in user
+// @route     GET api/auth/user
+// @desc      Get user data
 // @access    Private
-router.get("/", auth, async (req, res) => {
+router.get("/user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
+    if (!user) throw Error("User does not exist");
     res.json(user);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-// @route POST api/auth
-// @desc Auth user
+// @route POST api/auth/login
+// @desc Login user
 // @access Public
-router.post("/", (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   // Validation
@@ -39,27 +39,72 @@ router.post("/", (req, res) => {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
-  // Check for existing user
-  User.findOne({ email }).then((user) => {
-    if (!user) return res.status(400).json({ msg: "User does not exist" });
+  try {
+    const user = await User.findOne({ email });
+    if (!user) throw Error("User does not exist");
 
-    // Validate password
-    bcrypt.compare(password, user.password).then((isMatch) => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw Error("Invalid credentials");
 
-      jwt.sign({ id: user.id }, jwtENV, { expiresIn: 3600 }, (err, token) => {
-        if (err) throw err;
-        res.json({
-          token,
-          user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-          },
-        });
-      });
+    const token = jwt.sign({ id: user._id }, jwtENV, { expiresIn: 3600 });
+    if (!token) throw Error("Could not sign the token");
+
+    res.status(200).json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
-  });
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
+// @route POST api/auth/register
+// @desc Register user
+// @access Public
+router.post("/register", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // Validation
+  if (!name || !email || !password) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (user) throw Error("User already exists");
+
+    const salt = await bcrypt.genSalt(10);
+    if (!salt) throw Error("Something went wrong with bcrypt");
+
+    const hash = await bcrypt.hash(password, salt);
+    if (!hash) throw Error("Something went wrong with password hashing");
+
+    const newUser = new User({
+      name,
+      email,
+      password: hash,
+    });
+
+    const savedUser = await newUser.save();
+    if (!savedUser) throw Error("Something went wrong saving the user");
+
+    const token = jwt.sign({ id: savedUser._id }, jwtENV, { expiresIn: 3600 });
+
+    res.status(200).json({
+      token,
+      user: {
+        id: savedUser.id,
+        name: savedUser.name,
+        email: savedUser.email,
+      },
+    });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 module.exports = router;
