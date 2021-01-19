@@ -7,6 +7,14 @@ const auth = require("../../middleware/auth");
 // User Model
 const User = require("../../models/user");
 
+let jwtENV;
+
+if (process.env.NODE_ENV !== "production") {
+  jwtENV = config.get("jwtSecret");
+} else {
+  jwtENV = process.env.JWT_SECRET;
+}
+
 // @route     GET api/auth
 // @desc      Get logged in user
 // @access    Private

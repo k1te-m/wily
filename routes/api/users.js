@@ -6,6 +6,14 @@ const jwt = require("jsonwebtoken");
 // User Model
 const User = require("../../models/user");
 
+let jwtENV;
+
+if (process.env.NODE_ENV !== "production") {
+  jwtENV = config.get("jwtSecret");
+} else {
+  jwtENV = process.env.JWT_SECRET;
+}
+
 // @route POST api/users
 // @desc Register new user
 // @access Public
