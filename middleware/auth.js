@@ -1,6 +1,14 @@
 const config = require("config");
 const jwt = require("jsonwebtoken");
 
+let jwtENV;
+
+if (process.env.NODE_ENV !== "production") {
+  jwtENV = config.get("jwtSecret");
+} else {
+  jwtENV = process.env.JWT_SECRET;
+}
+
 function auth(req, res, next) {
   const token = req.header("x-auth-token");
 
@@ -9,7 +17,7 @@ function auth(req, res, next) {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, config.get("jwtSecret"));
+    const decoded = jwt.verify(token, jwtENV);
     // Add user from payload
     req.user = decoded;
     next();

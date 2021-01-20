@@ -48,7 +48,7 @@ const AuthState = (props) => {
       },
     };
     try {
-      const res = await axios.post("/api/users", data, config);
+      const res = await axios.post("/api/auth/register", data, config);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
