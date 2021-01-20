@@ -8,8 +8,17 @@ const postSchema = new Schema({
     trim: true,
   },
   author: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  authorID: {
     type: Schema.Types.ObjectId,
     ref: "User",
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
