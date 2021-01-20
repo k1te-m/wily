@@ -4,6 +4,7 @@ import LoginButton from "../components/landing/LoginButton";
 import SignUpButton from "../components/landing/SignUpButton";
 import AuthContext from "../context/auth/authContext";
 import { Link } from "react-router-dom";
+import PostFeed from "../components/landing/PostFeed";
 
 const Landing = () => {
   const authContext = useContext(AuthContext);
@@ -38,6 +39,9 @@ const Landing = () => {
       <div className="container">
         <div className="row">
           <h5>Welcome, {authContext.user.name}!</h5>
+        </div>
+        <div className="row">
+          <PostFeed />
         </div>
         <div className="row">
           <Link to="/post">
