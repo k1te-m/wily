@@ -45,7 +45,7 @@ const Landing = () => {
         </div>
         <div className="row">
           <Link to="/post">
-            <button>Create Post</button>
+            <i className="fas fa-plus-circle" />
           </Link>
         </div>
       </div>
