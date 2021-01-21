@@ -40,10 +40,10 @@ const Landing = () => {
       <div className="container">
         <div className="row">
           <div className="col-8">
-            <h5>Welcome, {authContext.user.name}!</h5>
+            <h5>Welcome, {authContext.user.username}!</h5>
           </div>
           <div className="col-4">
-            <NavLink to="/profile">Profile</NavLink>
+            <Link to={authContext.user.username}>Profile</Link>
           </div>
         </div>
         <div className="row">
