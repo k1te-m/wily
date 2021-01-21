@@ -22,6 +22,12 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  followedUsers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);
