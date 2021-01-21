@@ -38,6 +38,10 @@ const userSchema = new Schema({
     type: String,
     default: "../images/user.png",
   },
+  bio: {
+    type: String,
+    trim: true,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
