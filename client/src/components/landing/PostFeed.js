@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import API from "../../utils/API";
 import AuthContext from "../../context/auth/authContext";
-import axios from "axios";
 
 const PostFeed = (props) => {
   const authContext = useContext(AuthContext);
