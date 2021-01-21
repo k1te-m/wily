@@ -25,7 +25,6 @@ const Profile = (req) => {
   const getUser = (username) => {
     API.getUserByUsername(username).then((response) => {
       userArr = response.data;
-      console.log(response);
       setUser(userArr);
     });
   };
@@ -34,7 +33,6 @@ const Profile = (req) => {
   const getPosts = (username) => {
     API.getPostsById(username).then((response) => {
       posts = response.data;
-      console.log(response);
       setUserPosts(posts);
     });
   };
