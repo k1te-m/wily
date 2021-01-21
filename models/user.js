@@ -34,6 +34,10 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
+  avatar: {
+    type: String,
+    default: "../images/user.png",
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
