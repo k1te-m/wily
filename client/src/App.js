@@ -31,7 +31,7 @@ function App() {
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/post" component={CreatePost} />
-              <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute path="/:username" component={Profile} />
             </Switch>
           </Router>
         </AlertState>

@@ -13,4 +13,10 @@ router.get("/", postController.getPosts);
 
 router.post("/", postController.savePost);
 
+// @route  GET api/posts/:username
+// @desc   Get specific posts by username
+// @access Private
+
+router.get("/:username", postController.getPostsByUsername);
+
 module.exports = router;

@@ -17,6 +17,7 @@ const CreatePost = (props) => {
   const [postObject, setPostObject] = useState({
     post: "",
     author: authContext.user.name,
+    username: authContext.user.username,
     authorID: authContext.user._id,
   });
 

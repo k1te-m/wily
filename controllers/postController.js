@@ -15,4 +15,12 @@ module.exports = {
       })
       .catch((error) => res.status(422).json(error));
   },
+  getPostsByUsername: (req, res) => {
+    const username = req.params.username;
+    Post.find({ username: username })
+      .then((posts) => {
+        res.json(posts);
+      })
+      .catch((error) => res.status(422).json(error));
+  },
 };

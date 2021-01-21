@@ -7,6 +7,11 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
@@ -37,6 +42,10 @@ const userSchema = new Schema({
   avatar: {
     type: String,
     default: "../images/user.png",
+  },
+  bio: {
+    type: String,
+    trim: true,
   },
 });
 

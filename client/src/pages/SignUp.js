@@ -23,12 +23,13 @@ const SignUp = (props) => {
 
   const [userObject, setUserObject] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = userObject;
+  const { name, username, email, password, password2 } = userObject;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,7 +46,7 @@ const SignUp = (props) => {
     } else if (password !== password2) {
       setAlert("Passwords do not match.", "danger");
     } else {
-      registerUser({ name, email, password });
+      registerUser({ name, username, email, password });
     }
   };
 
@@ -61,6 +62,13 @@ const SignUp = (props) => {
             name="name"
             placeholder="Kelly Smith"
             value={name}
+            type="text"
+          />
+          <Input
+            onChange={handleInputChange}
+            name="username"
+            placeholder="ksmithdev"
+            value={username}
             type="text"
           />
           <Input

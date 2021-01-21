@@ -12,6 +12,11 @@ const postSchema = new Schema({
     required: true,
     trim: true,
   },
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   authorID: {
     type: Schema.Types.ObjectId,
     ref: "User",
