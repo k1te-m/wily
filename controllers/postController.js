@@ -17,8 +17,7 @@ module.exports = {
   },
   getPostsByUsername: (req, res) => {
     const username = req.params.username;
-    console.log(username);
-    Post.find({ username: req.params.username })
+    Post.find({ username: username })
       .then((posts) => {
         res.json(posts);
       })
