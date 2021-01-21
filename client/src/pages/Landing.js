@@ -1,9 +1,10 @@
 import React, { useEffect, useContext } from "react";
+import styled from "styled-components";
 import Logo from "../components/Logo";
 import LoginButton from "../components/landing/LoginButton";
 import SignUpButton from "../components/landing/SignUpButton";
 import AuthContext from "../context/auth/authContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import PostFeed from "../components/landing/PostFeed";
 
 const Landing = () => {
@@ -38,7 +39,12 @@ const Landing = () => {
     return (
       <div className="container">
         <div className="row">
-          <h5>Welcome, {authContext.user.name}!</h5>
+          <div className="col-8">
+            <h5>Welcome, {authContext.user.name}!</h5>
+          </div>
+          <div className="col-4">
+            <NavLink to="/profile">Profile</NavLink>
+          </div>
         </div>
         <div className="row">
           <PostFeed />
