@@ -66,10 +66,10 @@ router.post("/login", async (req, res) => {
 // @desc Register user
 // @access Public
 router.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, username, email, password } = req.body;
 
   // Validation
-  if (!name || !email || !password) {
+  if (!name || !username || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
@@ -85,6 +85,7 @@ router.post("/register", async (req, res) => {
 
     const newUser = new User({
       name,
+      username,
       email,
       password: hash,
     });
@@ -99,6 +100,7 @@ router.post("/register", async (req, res) => {
       user: {
         id: savedUser.id,
         name: savedUser.name,
+        username: savedUser.username,
         email: savedUser.email,
       },
     });
