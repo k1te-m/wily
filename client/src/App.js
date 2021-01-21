@@ -11,6 +11,8 @@ import setAuthToken from "./utils/setAuthToken";
 
 // Alert Context State
 import AlertState from "./context/alert/AlertState";
+import Profile from "./pages/Profile";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Put login token in local storage
 if (localStorage.token) {
@@ -29,6 +31,7 @@ function App() {
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/post" component={CreatePost} />
+              <PrivateRoute exact path="/profile" component={Profile} />
             </Switch>
           </Router>
         </AlertState>
