@@ -13,7 +13,6 @@ const PostFeed = (props) => {
     API.getPosts().then((response) => {
       posts = response.data;
       setWilyPosts(posts);
-      console.log(wilyPosts);
     });
   };
 

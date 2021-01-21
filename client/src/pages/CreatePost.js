@@ -35,7 +35,6 @@ const CreatePost = (props) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(postObject);
     createPost(postObject);
   };
 

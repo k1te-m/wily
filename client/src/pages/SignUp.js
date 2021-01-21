@@ -47,7 +47,6 @@ const SignUp = (props) => {
     } else {
       registerUser({ name, email, password });
     }
-    console.log(userObject);
   };
 
   return (
