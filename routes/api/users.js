@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const userController = require("../../controllers/userController");
 
 // User Model
 const User = require("../../models/user");
@@ -16,5 +17,11 @@ router.get("/", async (req, res) => {
     res.status(400).json({ msg: e.message });
   }
 });
+
+// @route   GET api/users/:username
+// @desc    Get specific user
+// @access  Private
+
+router.get("/:username", userController.getUserByUsername);
 
 module.exports = router;
