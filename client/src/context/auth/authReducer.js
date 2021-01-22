@@ -7,6 +7,9 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   LOGIN_FAIL,
+  LIKE_POST,
+  UNLIKE_POST,
+  SET_CURRENT_POST,
 } from "../types";
 
 export default (state, action) => {
@@ -44,6 +47,16 @@ export default (state, action) => {
       return {
         ...state,
         error: null,
+      };
+    case SET_CURRENT_POST:
+      return {
+        ...state,
+        currentPost: action.payload,
+      };
+    case LIKE_POST:
+      return {
+        ...state,
+        likesCount: action.payload,
       };
     default:
       return state;
