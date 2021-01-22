@@ -106,15 +106,6 @@ const AuthState = (props) => {
     }
   };
 
-  const likePost = async (post) => {
-    try {
-      dispatch({
-        type: LIKE_POST,
-        payload: post.likesCount + 1,
-      });
-    } catch (e) {}
-  };
-
   return (
     <AuthContext.Provider
       value={{
@@ -130,7 +121,6 @@ const AuthState = (props) => {
         logout,
         clearErrors,
         setCurrentPost,
-        likePost,
       }}
     >
       {props.children}
