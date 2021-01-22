@@ -23,4 +23,17 @@ module.exports = {
       })
       .catch((error) => res.status(422).json(error));
   },
+  getPostsByIDandUpdate: (req, res) => {
+    const id = req.params._id;
+    Post.findOne({ _id: id })
+      .then((post) => {
+        console.log(post instanceof Post);
+        console.log(post.likesCount);
+        post.likesCount++;
+        console.log(post.likesCount);
+        post.save();
+        res.json(post);
+      })
+      .catch((error) => res.status(422).json(error));
+  },
 };
