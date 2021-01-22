@@ -19,4 +19,10 @@ router.post("/", postController.savePost);
 
 router.get("/:username", postController.getPostsByUsername);
 
+// @route  GET api/posts/fav/:_id
+// @desc   Get specific posts by username
+// @access Private
+
+router.get("/fav/:_id", postController.getPostsByIDandUpdate);
+
 module.exports = router;
