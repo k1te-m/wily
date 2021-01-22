@@ -12,6 +12,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   LOGIN_FAIL,
+  SET_CURRENT_POST,
+  LIKE_POST,
 } from "../types";
 
 const AuthState = (props) => {
@@ -21,6 +23,7 @@ const AuthState = (props) => {
     loading: true,
     user: null,
     error: null,
+    currentPost: null,
   };
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -89,6 +92,29 @@ const AuthState = (props) => {
   // Clear errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
+  // Set Current Post for likes
+  const setCurrentPost = async (id) => {
+    try {
+      const res = await axios.get("/api/posts/fav/" + id);
+      console.log(res.data);
+      dispatch({
+        type: SET_CURRENT_POST,
+        payload: res.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const likePost = async (post) => {
+    try {
+      dispatch({
+        type: LIKE_POST,
+        payload: post.likesCount + 1,
+      });
+    } catch (e) {}
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -97,11 +123,14 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
+        currentPost: state.currentPost,
         registerUser,
         loadUser,
         loginUser,
         logout,
         clearErrors,
+        setCurrentPost,
+        likePost,
       }}
     >
       {props.children}
