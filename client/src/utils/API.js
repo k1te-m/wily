@@ -13,4 +13,7 @@ export default {
   getUserByUsername: async (id) => {
     return await axios.get("/api/users/" + id);
   },
+  getPostsForFav: async (id) => {
+    return await axios.get("/api/posts/fav/" + id);
+  },
 };
